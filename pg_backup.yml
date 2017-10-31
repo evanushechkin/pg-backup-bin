@@ -1,0 +1,20 @@
+LogFile: "/var/log/pg_basebackup.log"
+ListenIP: "127.0.0.1"
+ListenPort: "48080"
+Commands:
+  DocCommand: "docker exec pgsql96.snap su postgres -c "
+  PgCommand: "pg_basebackup -x -P -R -Ft -z -Z 4 -v -h local  -U rep -D "
+  RsyncCommand: "rsync --bwlimit=45000 -avP -e "
+Path:
+  BackupDir: "/var/backups/postgresql/pgbasebackup/"
+  DocBackupDir: "/var/backups/pgbasebackup/"
+BackUpServer:
+  RemoteServer: "192.168.0.2"
+  RemotePort: "22"
+  RemoteUser: "backup"
+  RemotePath: "/mnt/data/backup/postgresql/pgbasebackup/"
+ShedulePlan:
+  ShPlan: "minute"
+  ShTime: "16:34"
+  ShHour: 2
+  ShMinute: 1
